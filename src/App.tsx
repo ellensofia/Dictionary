@@ -1,20 +1,18 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Search from "./assets/components/Search";
-import Saved from "./assets/components/Saved";
-import Result from "./assets/components/Result";
+import Search from "./components/Search";
+import Saved from "./components/Saved";
+import Result from "./components/Result";
+import { AppContainer } from "./App_style";
 
 function App() {
   return (
-    <>
+    <AppContainer>
       <h1>Dictionary</h1>
       <Search />
       <div>
-        <Saved />
         <Result />
+        <Saved />
       </div>
-    </>
+    </AppContainer>
   );
 }
 
