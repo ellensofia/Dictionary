@@ -1,3 +1,5 @@
+import { Searchfield } from "./Search.style";
+
 export default function Search() {
-  return <>searchbar</>;
+  return <Searchfield>searchbar</Searchfield>;
 }
