@@ -17,30 +17,37 @@ interface Word {
   }>;
 }
 
-export default function Result() {
+interface Props {
+  searchedWord: string | undefined;
+}
+
+export default function Result({ searchedWord }: Props) {
   const [wordData, setwordData] = useState<Word[]>([]);
+
   const fetchData = async () => {
-    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/hello")
-      .then((wordData) => {
-        if (!wordData.ok) {
-          throw new Error("wordData not ok");
-        }
-        return wordData.json();
-      })
-      .then((data) => {
-        setwordData(data);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch data:", error);
-      });
+    if (searchedWord) {
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`)
+        .then((wordData) => {
+          if (!wordData.ok) {
+            throw new Error("wordData not ok");
+          }
+          return wordData.json();
+        })
+        .then((data) => {
+          setwordData(data);
+          console.log(wordData);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch data:", error);
+        });
+    }
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchedWord]);
   return (
     <>
-      <p>API result</p>
       {wordData &&
         wordData.map((word, index) => (
           <div key={index}>
