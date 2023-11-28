@@ -1,7 +1,7 @@
-import { DarkMode } from "@mui/icons-material";
 import { useState } from "react";
 import { AppContainer } from "./App.style";
 import { Word } from "./Interfaces";
+import DarkMode from "./components/Darkmode";
 import Saved from "./components/Saved";
 import Search from "./components/Search";
 
