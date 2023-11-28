@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AppContainer } from "./App.style";
 import Darkmode from "./components/Darkmode";
-import Result from "./components/Result";
 import Saved from "./components/Saved";
 import Search from "./components/Search";
 
@@ -12,9 +11,8 @@ function App() {
     <AppContainer>
       <h1>Dictionary</h1>
       <Darkmode />
-      <Search setSearchedWord={setSearchedWord} />
+      <Search setSearchedWord={setSearchedWord} searchedWord={searchedWord} />
       <div>
-        <Result searchedWord={searchedWord} />
         <Saved />
       </div>
     </AppContainer>

@@ -1,69 +1,48 @@
-import { useEffect, useState } from "react";
-import Player from "./Player";
-
-interface Word {
-  word: string;
-  phonetic: string;
-  phonetics: Array<{ text: string; audio?: string }>;
-  origin: string;
-  meanings: Array<{
-    partOfSpeech: string;
-    definitions: Array<{
-      definition: string;
-      example?: string;
-      synonyms: string[];
-      antonyms: string[];
-    }>;
-  }>;
-}
+import { Word } from "../Interfaces";
 
 interface Props {
-  searchedWord: string | undefined;
+  data: Word[] | undefined;
 }
 
-export default function Result({ searchedWord }: Props) {
-  const [wordData, setwordData] = useState<Word[]>([]);
-
-  const fetchData = async () => {
-    if (searchedWord) {
-      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`)
-        .then((wordData) => {
-          if (!wordData.ok) {
-            throw new Error("wordData not ok");
-          }
-          return wordData.json();
-        })
-        .then((data) => {
-          setwordData(data);
-          console.log(wordData);
-        })
-        .catch((error) => {
-          console.error("Failed to fetch data:", error);
-        });
-    }
+export default function Result({ data }: Props) {
+  // Function to extract country code from the audio URL
+  const extractCountryCode = (url: string) => {
+    const parts = url.split("-");
+    const lastPart = parts[parts.length - 1];
+    return lastPart.split(".")[0].toUpperCase();
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [searchedWord]);
   return (
     <>
-      {wordData &&
-        wordData.map((word, index) => (
+      {data &&
+        data.map((data, index) => (
           <div key={index}>
-            <h2>{word.word}</h2>
-            {word.meanings.map((defs, dindex) => (
-              <div key={dindex}>
-                {defs.definitions.map((def, i) => (
-                  <div key={i}>{def.definition}</div>
+            <h2 data-testid="search-result-heading">{data.word}</h2>
+            <h4>{data.phonetic}</h4>
+            <h4>Definitions</h4>
+            {data.meanings.map((defs, dIndex) => (
+              <ul key={dIndex}>
+                {defs.definitions.slice(0, 2).map((def, i) => (
+                  <li>
+                    <p key={i}>{def.definition}</p>
+                  </li>
                 ))}
+              </ul>
+            ))}
+            <div>{data.origin}</div>
+            {data.phonetics.map((phonetics, pIndex) => (
+              <div key={pIndex}>
+                {phonetics.audio && (
+                  <div key={pIndex}>
+                    <h4>{extractCountryCode(phonetics.audio)}</h4>
+                    <span>{phonetics.text}</span>
+                    <audio src={phonetics.audio} controls />
+                  </div>
+                )}
               </div>
             ))}
-            <div>{word.phonetic}</div>
-            <div>{word.origin}</div>
           </div>
         ))}
-      <Player />
     </>
   );
 }
