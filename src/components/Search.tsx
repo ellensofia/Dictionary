@@ -6,9 +6,14 @@ import { Searchfield } from "./Search.style";
 interface Props {
   setSearchedWord: (word: string) => void;
   searchedWord: string | undefined;
+  onSaveWord: (word: Word) => void;
 }
 
-export default function Search({ setSearchedWord, searchedWord }: Props) {
+export default function Search({
+  setSearchedWord,
+  searchedWord,
+  onSaveWord,
+}: Props) {
   const [searchData, setSearchData] = useState<Word[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +58,7 @@ export default function Search({ setSearchedWord, searchedWord }: Props) {
         <input ref={inputRef} type="text" placeholder="Search..." />
         <button type="submit">Search</button>
       </Searchfield>
-      <Result data={searchData} />
+      <Result data={searchData} onSaveWord={onSaveWord} />
     </>
   );
 }

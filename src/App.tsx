@@ -1,19 +1,29 @@
 import { useState } from "react";
 import { AppContainer } from "./App.style";
+import { Word } from "./Interfaces";
 import Darkmode from "./components/Darkmode";
 import Saved from "./components/Saved";
 import Search from "./components/Search";
 
 function App() {
   const [searchedWord, setSearchedWord] = useState<string | undefined>("");
+  const [savedWords, setSavedWords] = useState<Word[]>([]);
+
+  const handleSavedWords = (word: Word) => {
+    setSavedWords((prevWords) => [...prevWords, word]);
+  };
 
   return (
     <AppContainer>
       <h1>Dictionary</h1>
       <Darkmode />
-      <Search setSearchedWord={setSearchedWord} searchedWord={searchedWord} />
+      <Search
+        setSearchedWord={setSearchedWord}
+        searchedWord={searchedWord}
+        onSaveWord={handleSavedWords}
+      />
       <div>
-        <Saved />
+        <Saved savedWords={savedWords} />
       </div>
     </AppContainer>
   );

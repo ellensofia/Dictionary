@@ -5,7 +5,13 @@ import Search from "../components/Search";
 
 describe("Search field", async () => {
   test("User should be able to type a word in the inputfield", async () => {
-    render(<Search setSearchedWord={vi.fn()} searchedWord={"hello"} />);
+    render(
+      <Search
+        setSearchedWord={vi.fn()}
+        searchedWord={"hello"}
+        onSaveWord={vi.fn()}
+      />
+    );
     const user = userEvent.setup();
     const searchField = screen.getByRole("textbox");
 
