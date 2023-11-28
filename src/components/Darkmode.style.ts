@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-export const DarkmodeBtn = styled.button`
+export const DarkModeBtn = styled.div`
   cursor: pointer;
-  width: 200px;
 `;

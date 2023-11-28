@@ -1,5 +1,6 @@
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useEffect, useState } from "react";
-import { DarkmodeBtn } from "./Darkmode.style";
+import { DarkModeBtn } from "./Darkmode.style";
 
 export default function Darkmode() {
   const [isDark, setIsDark] = useState(true);
@@ -8,12 +9,9 @@ export default function Darkmode() {
     if (isDark) {
       document.body.classList.add("dark");
       setIsDark(true);
-      console.log("dark");
     } else {
       document.body.classList.remove("dark");
       setIsDark(false);
-
-      console.log("remove dark");
     }
   }, [isDark]);
 
@@ -21,5 +19,9 @@ export default function Darkmode() {
     setIsDark(!isDark);
   };
 
-  return <DarkmodeBtn onClick={toggleDarkmode}>darkmode</DarkmodeBtn>;
+  return (
+    <DarkModeBtn>
+      <DarkModeIcon onClick={toggleDarkmode} data-testid={"darkmode"} />
+    </DarkModeBtn>
+  );
 }

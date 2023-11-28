@@ -1,7 +1,7 @@
+import { DarkMode } from "@mui/icons-material";
 import { useState } from "react";
 import { AppContainer } from "./App.style";
 import { Word } from "./Interfaces";
-import Darkmode from "./components/Darkmode";
 import Saved from "./components/Saved";
 import Search from "./components/Search";
 
@@ -15,8 +15,10 @@ function App() {
 
   return (
     <AppContainer>
+      <header>
+        <DarkMode />
+      </header>
       <h1>Dictionary</h1>
-      <Darkmode />
       <Search
         setSearchedWord={setSearchedWord}
         searchedWord={searchedWord}
