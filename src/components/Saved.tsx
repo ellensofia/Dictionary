@@ -7,8 +7,8 @@ interface Props {
 export default function Saved({ savedWords }: Props) {
   return (
     <div>
-      <h4>Saved words</h4>
-      <ul>
+      <h3>Saved words</h3>
+      <ul data-testid="saved-word-list">
         {savedWords?.map((word, index) => (
           <li key={index}>{word.word}</li>
         ))}

@@ -23,6 +23,7 @@ export default function Result({ data, onSaveWord }: Props) {
             <h2 data-testid="search-result-heading">{data.word}</h2>
             <div
               className="save"
+              data-testId="save"
               onClick={() => {
                 onSaveWord(data);
               }}
@@ -35,8 +36,8 @@ export default function Result({ data, onSaveWord }: Props) {
             {data.meanings.map((defs, dIndex) => (
               <ul key={dIndex}>
                 {defs.definitions.slice(0, 2).map((def, i) => (
-                  <li>
-                    <p key={i}>{def.definition}</p>
+                  <li key={i}>
+                    <p>{def.definition}</p>
                   </li>
                 ))}
               </ul>
@@ -45,7 +46,7 @@ export default function Result({ data, onSaveWord }: Props) {
             {data.phonetics.map((phonetics, pIndex) => (
               <div className="audio-container" key={pIndex}>
                 {phonetics.audio && (
-                  <div key={pIndex}>
+                  <div>
                     <div>
                       <h4>{extractCountryCode(phonetics.audio)}</h4>
                       <span>{phonetics.text}</span>
