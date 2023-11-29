@@ -1,3 +1,4 @@
+import { useSessionStorage } from "@uidotdev/usehooks";
 import { useState } from "react";
 import { AppContainer } from "./App.style";
 import { Word } from "./Interfaces";
@@ -7,7 +8,7 @@ import Search from "./components/Search";
 
 function App() {
   const [searchedWord, setSearchedWord] = useState<string | undefined>("");
-  const [savedWords, setSavedWords] = useState<Word[]>([]);
+  const [savedWords, setSavedWords] = useSessionStorage<Word[]>("word", []);
 
   const handleSavedWords = (wordToSave: Word) => {
     if (!savedWords.some((savedWord) => savedWord.word === wordToSave.word))
