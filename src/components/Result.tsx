@@ -17,47 +17,64 @@ export default function Result({ data, onSaveWord }: Props) {
 
   return (
     <ResultStyle>
-      {data &&
-        data.map((data, index) => (
-          <div key={index}>
-            <h2 data-testid="search-result-heading">{data.word}</h2>
-            <div
-              className="save"
-              data-testId="save"
-              onClick={() => {
-                onSaveWord(data);
-              }}
-            >
-              <span>Save</span>
-              <FavoriteIcon />
-            </div>
-            <h4>{data.phonetic}</h4>
-            <h4>Definitions</h4>
-            {data.meanings.map((defs, dIndex) => (
-              <ul key={dIndex}>
-                {defs.definitions.slice(0, 2).map((def, i) => (
-                  <li key={i}>
-                    <p>{def.definition}</p>
-                  </li>
-                ))}
-              </ul>
-            ))}
-            {data.origin && <div>{data.origin}</div>}
-            {data.phonetics.map((phonetics, pIndex) => (
-              <div className="audio-container" key={pIndex}>
-                {phonetics.audio && (
-                  <div>
+      {data && data.length > 0 && (
+        <section>
+          <h2 data-testid="search-result-heading">{data[0].word}</h2>
+          <div
+            className="save"
+            data-testid="save"
+            onClick={() => {
+              onSaveWord(data[0]);
+            }}
+          >
+            <span>Save</span>
+            <FavoriteIcon />
+          </div>
+          {data.map((data, index) => (
+            <div key={index}>
+              <h3 className="phonetic">
+                {index + 1}. {data.phonetic}
+              </h3>
+              {data.meanings.map((defs, dIndex) => (
+                <div key={dIndex}>
+                  <h4>{defs.partOfSpeech}</h4>
+                  <ul>
+                    {defs.definitions.slice(0, 10).map((def, i) => (
+                      <>
+                        <li key={i}>
+                          <p>{def.definition}</p>
+                        </li>
+
+                        {def.synonyms.length > 0 && (
+                          <>
+                            <h5 className="synonyms">Synonyms</h5>
+                            {def.synonyms.map((synonym, synonymIndex) => (
+                              <div key={synonymIndex} className="synonym">
+                                {synonym}
+                              </div>
+                            ))}
+                          </>
+                        )}
+                      </>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              {data.origin && <div>{data.origin}origin</div>}
+              {data.phonetics.map((phonetics, pIndex) => (
+                <div className={"audio-container"} key={pIndex}>
+                  {phonetics.audio && (
                     <div>
                       <h4>{extractCountryCode(phonetics.audio)}</h4>
-                      <span>{phonetics.text}</span>
+                      <audio src={phonetics.audio} controls />
                     </div>
-                    <audio src={phonetics.audio} controls />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </section>
+      )}
     </ResultStyle>
   );
 }

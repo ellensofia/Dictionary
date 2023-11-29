@@ -18,13 +18,15 @@ function App() {
       <header>
         <DarkMode />
       </header>
-      <h1>Dictionary</h1>
-      <Search
-        setSearchedWord={setSearchedWord}
-        searchedWord={searchedWord}
-        onSaveWord={handleSavedWords}
-      />
-      <div>
+      <div className="container">
+        <div className="search-container">
+          <h1>Dictionary</h1>
+          <Search
+            setSearchedWord={setSearchedWord}
+            searchedWord={searchedWord}
+            onSaveWord={handleSavedWords}
+          />
+        </div>
         <Saved savedWords={savedWords} />
       </div>
     </AppContainer>
