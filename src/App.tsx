@@ -2,15 +2,20 @@ import { useState } from "react";
 import { AppContainer } from "./App.style";
 import { Word } from "./Interfaces";
 import DarkMode from "./components/Darkmode";
-import Saved from "./components/Saved";
+import SavedList from "./components/SavedList";
 import Search from "./components/Search";
 
 function App() {
   const [searchedWord, setSearchedWord] = useState<string | undefined>("");
   const [savedWords, setSavedWords] = useState<Word[]>([]);
 
-  const handleSavedWords = (word: Word) => {
-    setSavedWords((prevWords) => [...prevWords, word]);
+  const handleSavedWords = (wordToSave: Word) => {
+    if (!savedWords.some((savedWord) => savedWord.word === wordToSave.word))
+      setSavedWords((prevWords) => [...prevWords, wordToSave]);
+  };
+
+  const handleSearch = (word: string) => {
+    setSearchedWord(word);
   };
 
   return (
@@ -27,7 +32,11 @@ function App() {
             onSaveWord={handleSavedWords}
           />
         </div>
-        <Saved savedWords={savedWords} />
+        <SavedList
+          savedWords={savedWords}
+          setSavedWords={setSavedWords}
+          handleSearch={handleSearch}
+        />
       </div>
     </AppContainer>
   );
