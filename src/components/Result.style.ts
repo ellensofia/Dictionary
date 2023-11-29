@@ -21,6 +21,8 @@ export const ResultStyle = styled.div`
 
   .audio-container {
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
     margin-bottom: 1rem;
   }
 
@@ -47,7 +49,7 @@ export const ResultStyle = styled.div`
     }
   }
 
-  .synonyms {
+  .list {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -55,7 +57,7 @@ export const ResultStyle = styled.div`
     margin: 1rem 0 0.5rem -1rem;
   }
 
-  .synonym {
+  .item {
     padding: 0.1rem 0rem;
     margin-bottom: 0.2rem;
     text-decoration: underline;

@@ -39,8 +39,6 @@ export default function Search({
         })
         .then((data) => {
           setSearchData(data);
-          console.log(searchData);
-          console.log(data);
         })
         .catch((error) => {
           console.error("Failed to fetch data: ", error);

@@ -1,4 +1,5 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import React from "react";
 import { Word } from "../Interfaces";
 import { ResultStyle } from "./Result.style";
 
@@ -40,36 +41,46 @@ export default function Result({ data, onSaveWord }: Props) {
                   <h4>{defs.partOfSpeech}</h4>
                   <ul>
                     {defs.definitions.slice(0, 10).map((def, i) => (
-                      <>
-                        <li key={i}>
+                      <div key={i}>
+                        <li>
                           <p>{def.definition}</p>
                         </li>
 
                         {def.synonyms.length > 0 && (
-                          <>
-                            <h5 className="synonyms">Synonyms</h5>
+                          <li>
+                            <h5 className="list">Synonyms</h5>
                             {def.synonyms.map((synonym, synonymIndex) => (
-                              <div key={synonymIndex} className="synonym">
+                              <div key={synonymIndex} className="item">
                                 {synonym}
                               </div>
                             ))}
-                          </>
+                          </li>
                         )}
-                      </>
+                        {def.antonyms.length > 0 && (
+                          <li>
+                            <h5 className="list">Antonyms</h5>
+                            {def.antonyms.map((antonym, antonymIndex) => (
+                              <div key={antonymIndex} className="item">
+                                {antonym}
+                              </div>
+                            ))}
+                          </li>
+                        )}
+                      </div>
                     ))}
                   </ul>
                 </div>
               ))}
               {data.origin && <div>{data.origin}origin</div>}
               {data.phonetics.map((phonetics, pIndex) => (
-                <div className={"audio-container"} key={pIndex}>
+                <React.Fragment key={pIndex}>
                   {phonetics.audio && (
-                    <div>
+                    <div className={"audio-container"}>
                       <h4>{extractCountryCode(phonetics.audio)}</h4>
                       <audio src={phonetics.audio} controls />
                     </div>
                   )}
-                </div>
+                </React.Fragment>
               ))}
             </div>
           ))}
