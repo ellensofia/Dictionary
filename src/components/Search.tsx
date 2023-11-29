@@ -15,16 +15,26 @@ export default function Search({
   onSaveWord,
 }: Props) {
   const [searchData, setSearchData] = useState<Word[]>([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const searchTerm = inputRef.current?.value;
-    if (searchTerm) {
-      setSearchedWord(searchTerm);
-    }
     if (inputRef.current) {
-      inputRef.current.value = "";
+      // If input value is empty or only consists of white space set error
+      if (
+        inputRef.current.value === "" ||
+        inputRef.current.value.trim() === ""
+      ) {
+        setErrorMessage("Please enter a word");
+      } else {
+        const searchTerm = inputRef.current?.value;
+        if (searchTerm) {
+          setSearchedWord(searchTerm);
+          inputRef.current.value = "";
+          setErrorMessage("");
+        }
+      }
     }
   };
 
@@ -53,9 +63,10 @@ export default function Search({
   return (
     <>
       <Searchfield onSubmit={handleSubmit}>
-        <input ref={inputRef} type="text" placeholder="Search..." />
+        <input ref={inputRef} type="text" placeholder="Write a word..." />
         <button type="submit">Search</button>
       </Searchfield>
+      {errorMessage && <p data-testId="error">{errorMessage}</p>}
       <Result data={searchData} onSaveWord={onSaveWord} />
     </>
   );

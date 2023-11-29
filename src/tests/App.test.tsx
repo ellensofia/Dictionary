@@ -22,21 +22,25 @@ describe("Darkmode", () => {
   });
 });
 
-describe("Saved data", () => {
+describe("Saved data tests", () => {
   test("User should be able to save words in a list", async () => {
     render(<App />);
     const user = userEvent.setup();
-    const searchField = screen.getByRole("textbox");
 
     // Simulate user searching for the word hello
+    const searchField = screen.getByRole("textbox");
     await user.click(searchField);
     await user.type(searchField, "hello");
     await user.click(screen.getByText("Search"));
     const result = screen.getByTestId("search-result-heading");
     expect(result).toHaveTextContent("hello");
+
+    // Check if save button is in the document and simulate click
     const saveButton = screen.getByTestId("save");
     expect(saveButton).toBeInTheDocument;
     await user.click(saveButton);
+
+    // Check if the saved list is in the document and if word is in the list
     const savedWordList = screen.getByTestId("saved-word-list");
     expect(savedWordList).toBeInTheDocument;
     expect(savedWordList).toHaveTextContent("hello");

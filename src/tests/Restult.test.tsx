@@ -9,7 +9,7 @@ const fetchData = async (url: string) => {
 describe("Search result", () => {
   test("Users search should result be displayed", () => {});
 
-  it("Should fetch mock data successfully", async () => {
+  test("Should fetch mock data successfully", async () => {
     // Call the function that makes the HTTP request
     const data = await fetchData(
       "https://api.dictionaryapi.dev/api/v2/entries/en/hello"
