@@ -23,7 +23,6 @@ export default function Result({ data, onSaveWord }: Props) {
           <h2 data-testid="search-result-heading">{data[0].word}</h2>
           <button
             className="save"
-            // data-testid="save"
             onClick={() => {
               onSaveWord(data[0]);
             }}
@@ -77,7 +76,7 @@ export default function Result({ data, onSaveWord }: Props) {
                   {phonetics.audio && (
                     <div className={"audio-container"}>
                       <h4>{extractCountryCode(phonetics.audio)}</h4>
-                      <audio src={phonetics.audio} controls />
+                      <audio role="audio" src={phonetics.audio} controls />
                     </div>
                   )}
                 </React.Fragment>

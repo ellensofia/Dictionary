@@ -8,9 +8,11 @@ export const AppContainer = styled.div`
   .container {
     justify-content: space-between;
     display: flex;
+    flex-wrap: wrap;
   }
 
   .search-container {
     width: 50vw;
+    min-width: 350px;
   }
 `;
