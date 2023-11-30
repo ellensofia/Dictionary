@@ -1,21 +1,21 @@
+import { render, screen } from "@testing-library/react";
+import Result from "../components/Result";
 import mockData from "../mocks/mock.json";
 
-const fetchData = async (url: string) => {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-};
+describe("Tests for search result", () => {
+  test("Users search should result be displayed", () => {
+    render(<Result data={mockData} onSaveWord={vi.fn()} />);
 
-describe("Search result", () => {
-  test("Users search should result be displayed", () => {});
+    // Check if the element with test-id 'search-result-heading' contains the text 'hello'
+    const result = screen.getByTestId("search-result-heading");
+    expect(result).toHaveTextContent(/hello/i);
+  });
 
-  test("Should fetch mock data successfully", async () => {
-    // Call the function that makes the HTTP request
-    const data = await fetchData(
-      "https://api.dictionaryapi.dev/api/v2/entries/en/hello"
-    );
+  test("Result should includes audio file or files", async () => {
+    render(<Result data={mockData} onSaveWord={vi.fn()} />);
 
-    // Assert that the returned data matches the mock data
-    expect(data).toEqual(mockData);
+    // Check if audioplayer is in the document
+    const audioPlayer = screen.getByRole("audio");
+    expect(audioPlayer).toBeInTheDocument;
   });
 });
