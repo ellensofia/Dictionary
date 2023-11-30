@@ -34,6 +34,12 @@ export const ResultStyle = styled.div`
     position: absolute;
     right: 0;
     top: 1rem;
+    background-color: transparent;
+    color: var(--color-seconday);
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 1rem;
 
     span {
       font-weight: 600;

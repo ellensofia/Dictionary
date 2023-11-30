@@ -66,7 +66,7 @@ export default function Search({
         <input ref={inputRef} type="text" placeholder="Write a word..." />
         <button type="submit">Search</button>
       </Searchfield>
-      {errorMessage && <p data-testId="error">{errorMessage}</p>}
+      {errorMessage && <p data-testid="error">{errorMessage}</p>}
       <Result data={searchData} onSaveWord={onSaveWord} />
     </>
   );

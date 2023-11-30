@@ -5,7 +5,7 @@ export const Searchfield = styled.form`
   button {
     padding: 0.8rem;
     font-size: 1rem;
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--color-secondary);
   }
 
   input {

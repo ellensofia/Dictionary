@@ -18,11 +18,17 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 body.dark {
   --color-primary: black;
   --color-secondary: rgba(255, 255, 255, 0.87);
+}
+
+body.dark .save .MuiSvgIcon-root path,
+body.dark .remove .MuiSvgIcon-root path,
+body.dark .save span {
+  fill: var(--color-secondary);
 }

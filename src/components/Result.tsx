@@ -21,16 +21,16 @@ export default function Result({ data, onSaveWord }: Props) {
       {data && data.length > 0 && (
         <section>
           <h2 data-testid="search-result-heading">{data[0].word}</h2>
-          <div
+          <button
             className="save"
-            data-testid="save"
+            // data-testid="save"
             onClick={() => {
               onSaveWord(data[0]);
             }}
           >
-            <span>Save</span>
+            Save
             <FavoriteIcon />
-          </div>
+          </button>
           {data.map((data, index) => (
             <div key={index}>
               <h3 className="phonetic">
@@ -47,24 +47,24 @@ export default function Result({ data, onSaveWord }: Props) {
                         </li>
 
                         {def.synonyms.length > 0 && (
-                          <li>
+                          <div>
                             <h5 className="list">Synonyms</h5>
                             {def.synonyms.map((synonym, synonymIndex) => (
                               <div key={synonymIndex} className="item">
                                 {synonym}
                               </div>
                             ))}
-                          </li>
+                          </div>
                         )}
                         {def.antonyms.length > 0 && (
-                          <li>
+                          <div>
                             <h5 className="list">Antonyms</h5>
                             {def.antonyms.map((antonym, antonymIndex) => (
                               <div key={antonymIndex} className="item">
                                 {antonym}
                               </div>
                             ))}
-                          </li>
+                          </div>
                         )}
                       </div>
                     ))}
