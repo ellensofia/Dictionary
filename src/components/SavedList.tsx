@@ -27,7 +27,11 @@ export default function SavedList({
         {savedWords?.map((word, index) => (
           <li key={index}>
             <span onClick={() => handleSearch(word.word)}>{word.word}</span>
-            <button className="remove" onClick={() => removeWord(word)}>
+            <button
+              className="remove"
+              data-testid="remove"
+              onClick={() => removeWord(word)}
+            >
               <CancelIcon />
             </button>
           </li>
