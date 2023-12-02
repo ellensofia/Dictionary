@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Lato, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,8 +11,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  --color-primary: rgba(255, 255, 255, 0.87);
-  --color-secondary: black;
+  --color-primary: rgba(244, 244, 244, 0.87);
+  --color-secondary: rgb(17, 17, 17);
+}
+
+h2,
+h3,
+h4,
+h5 {
+  font-family: "playfair display";
+  font-weight: 700;
+  margin-top: 1rem;
 }
 
 body {
@@ -20,11 +29,31 @@ body {
   min-height: 100vh;
   background-color: var(--color-primary);
   color: var(--color-secondary);
+  margin-top: 3rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  position: fixed;
+  background-color: var(--color-primary);
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 1rem 2rem;
+  width: calc(100% - 4rem);
+  z-index: 100;
 }
 
 body.dark {
-  --color-primary: black;
-  --color-secondary: rgba(255, 255, 255, 0.87);
+  --color-primary: rgb(17, 17, 17);
+  --color-secondary: rgba(251, 251, 251, 0.87);
 }
 
 body.dark .save .MuiSvgIcon-root path,

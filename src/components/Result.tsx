@@ -12,22 +12,12 @@ interface Props {
 export default function Result({ searchResult, onSaveWord }: Props) {
   // Function to extract country code from the audio URL
   const extractCountryCode = (url: string) => {
-    const parts = url.split("-");
-    const lastPart = parts[parts.length - 1];
-    return lastPart.split(".")[0].toUpperCase();
+    const knownCountryCodes = ["us", "uk", "au", "ca"];
+    const countryCode = knownCountryCodes.find((code) =>
+      url.includes(`-${code}`)
+    );
+    return countryCode ? countryCode.toUpperCase() : "Unknown";
   };
-
-  // const mapOver = (array: []) => {
-  //   return (
-  //     <ul>
-  //       {{ array }.definitions.map((definition, dIndex) => (
-  //         <li key={dIndex} data-testid="definition">
-  //           {definition.definition}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // };
 
   return (
     <ResultStyle>
