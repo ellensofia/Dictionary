@@ -1,6 +1,6 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useEffect, useState } from "react";
-import { DarkModeBtn } from "./Darkmode.style";
+import { DarkModeBtn } from "./DarkMode.style";
 
 export default function Darkmode() {
   const [isDark, setIsDark] = useState(true);

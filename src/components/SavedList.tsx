@@ -1,4 +1,4 @@
-import CancelIcon from "@mui/icons-material/Cancel";
+import ClearIcon from "@mui/icons-material/Clear";
 import { Word } from "../Interfaces";
 import { SavedContainer } from "./Saved.style";
 
@@ -32,7 +32,7 @@ export default function SavedList({
               data-testid="remove"
               onClick={() => removeWord(word)}
             >
-              <CancelIcon />
+              <ClearIcon />
             </button>
           </li>
         ))}

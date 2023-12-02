@@ -2,7 +2,7 @@ import { useSessionStorage } from "@uidotdev/usehooks";
 import { useState } from "react";
 import { AppContainer } from "./App.style";
 import { Word } from "./Interfaces";
-import DarkMode from "./components/Darkmode";
+import DarkMode from "./components/DarkMode";
 import SavedList from "./components/SavedList";
 import Search from "./components/Search";
 
@@ -22,11 +22,11 @@ function App() {
   return (
     <AppContainer>
       <header>
+        <h1>Dictionary</h1>
         <DarkMode />
       </header>
       <div className="container">
         <div className="search-container">
-          <h1>Dictionary</h1>
           <Search
             setSearchedWord={setSearchedWord}
             searchedWord={searchedWord}

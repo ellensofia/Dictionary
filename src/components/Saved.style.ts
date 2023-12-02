@@ -2,18 +2,18 @@ import styled from "styled-components";
 
 export const SavedContainer = styled.div`
   border-radius: 1.2rem;
-  padding: 1rem;
-  min-width: 20vw;
-
+  margin-top: 2rem;
+  max-width: 300px;
+  width: 100%;
   h3 {
     margin: 0;
-    text-decoration: underline;
     margin-bottom: 1rem;
   }
 
   ul {
-    padding: 0;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     list-style: none;
   }
 

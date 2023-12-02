@@ -1,71 +1,81 @@
 import styled from "styled-components";
 
 export const ResultStyle = styled.div`
-  section {
+  article {
     position: relative;
   }
 
-  h2 {
-    font-size: 2rem;
-    margin: 1rem 0 0;
-  }
-
-  h4 {
-    margin: 0;
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid var(--color-secondary);
+    line-height: 2;
+    h2 {
+      font-size: 2.8rem;
+    }
+    h3 {
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
   }
 
   .phonetic {
-    margin: 0 0 1rem;
     font-weight: 400;
+  }
+
+  .partOfSpeech {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1.2rem;
   }
 
   .audio-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  audio {
+    border: 1px solid rgb(17, 17, 17);
+    border-radius: 40px;
+    background-color: pink;
   }
 
   .save {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
     cursor: pointer;
     position: absolute;
     right: 0;
     top: 1rem;
-    background-color: transparent;
-    color: var(--color-seconday);
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 1rem;
+    font-weight: 300;
 
-    span {
-      font-weight: 600;
+    svg {
+      font-size: 1.4rem;
     }
-  }
 
-  ul {
-    padding: 0 1.4rem;
+    path {
+      fill: var(--color-secondary);
+    }
 
-    p {
-      margin: 0;
-      font-size: 0.85rem;
+    &:hover {
+      background-color: transparent;
     }
   }
 
   .list {
-    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin: 1rem 0 0.5rem -1rem;
+    gap: 0.6rem;
   }
 
-  .item {
-    padding: 0.1rem 0rem;
-    margin-bottom: 0.2rem;
-    text-decoration: underline;
+  ul {
+    margin-top: 0.5rem;
+    list-style: none;
+  }
+
+  li {
   }
 `;
