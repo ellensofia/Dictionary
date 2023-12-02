@@ -11,7 +11,6 @@
         "text": "hɛˈləʊ"
       }
     ],
-    "origin": "early 19th century: variant of earlier hollo ; related to holla.",
     "meanings": [
       {
         "partOfSpeech": "exclamation",
@@ -30,8 +29,8 @@
           {
             "definition": "an utterance of ‘hello’; a greeting.",
             "example": "she was getting polite nods and hellos from people",
-            "synonyms": [],
-            "antonyms": []
+            "synonyms": ["hi"],
+            "antonyms": ["goodbye"]
           }
         ]
       },

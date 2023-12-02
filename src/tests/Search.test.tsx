@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe } from "vitest";
 import Search from "../components/Search";
@@ -38,17 +38,17 @@ describe("Unit testing for Search field component", async () => {
     // Verify that the search field accepts and input
     // Expect mockSetSearchedWord function to have been called
     const searchField = screen.getByRole("textbox");
-    await user.type(searchField, "hello world");
-    expect(searchField).toHaveValue("hello world");
+    await user.type(searchField, "test");
+    expect(searchField).toHaveValue("test");
     await user.click(screen.getByRole("button", { name: "Search" }));
-    expect(mockSetSerchedWord).toHaveBeenCalledWith("hello world");
+    expect(mockSetSerchedWord).toHaveBeenCalledWith("test");
   });
 
-  test("Should not be possible to search with empty search term", async () => {
+  test("Should not be possible to search with empty or incorrect search term", async () => {
     render(
       <Search
         setSearchedWord={vi.fn()}
-        searchedWord={""}
+        searchedWord={" "}
         onSaveWord={vi.fn()}
       />
     );
@@ -61,7 +61,16 @@ describe("Unit testing for Search field component", async () => {
     await user.click(searchButton);
 
     // Check if error message is displayed
-    const errorMessage = screen.getByTestId("error");
+    let errorMessage = screen.getByTestId("error");
     expect(errorMessage).toHaveTextContent("Please enter a word");
+
+    // Simulating user typing an incorrect word
+    await user.type(searchField, "idifljksdshf");
+    await user.click(searchButton);
+
+    await waitFor(() => {
+      errorMessage = screen.getByTestId("error");
+      expect(errorMessage).toHaveTextContent("Sorry, no definition was found");
+    });
   });
 });

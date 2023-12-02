@@ -1,11 +1,6 @@
 interface Phonetic {
   text: string;
   audio?: string;
-  sourceUrl?: string;
-  license?: {
-    name: string;
-    url: string;
-  };
 }
 
 interface Definition {
@@ -26,7 +21,6 @@ export interface Word {
   word: string;
   phonetic: string;
   phonetics: Phonetic[];
-  origin?: string;
   meanings: Meaning[];
   synonyms?: string[];
   antonyms?: string[];
@@ -34,5 +28,4 @@ export interface Word {
     name: string;
     url: string;
   };
-  sourceUrls?: string[];
 }
