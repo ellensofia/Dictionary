@@ -21,30 +21,23 @@ export default function Search({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputRef.current) {
-      // If input value is empty or only consists of white space set error
-      if (
-        inputRef.current.value === "" ||
-        inputRef.current.value.trim() === ""
-      ) {
+      const searchTerm = inputRef.current.value.trim();
+      if (!searchTerm) {
         setErrorMessage("Please enter a word");
+        setSearchData([]);
       } else {
-        const searchTerm = inputRef.current?.value;
-        if (searchTerm) {
-          setSearchedWord(searchTerm);
-          inputRef.current.value = "";
-          setErrorMessage("");
-        }
+        setSearchedWord(searchTerm);
+        inputRef.current.value = "";
+        setErrorMessage("");
       }
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = () => {
     if (searchedWord) {
       fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchedWord}`)
         .then((searchData) => {
-          if (!searchData.ok) {
-            throw new Error("Could not fetch data");
-          }
+          if (!searchData.ok) throw new Error("Could not fetch data");
           return searchData.json();
         })
         .then((data) => {
@@ -52,6 +45,8 @@ export default function Search({
         })
         .catch((error) => {
           console.error("Failed to fetch data: ", error);
+          setSearchData([]);
+          setErrorMessage("Sorry, no definition was found");
         });
     }
   };
@@ -67,7 +62,7 @@ export default function Search({
         <button type="submit">Search</button>
       </Searchfield>
       {errorMessage && <p data-testid="error">{errorMessage}</p>}
-      <Result data={searchData} onSaveWord={onSaveWord} />
+      <Result searchResult={searchData} onSaveWord={onSaveWord} />
     </>
   );
 }
