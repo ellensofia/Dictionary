@@ -9,10 +9,8 @@ describe("Tests for search result", () => {
     // Check if the expected text result is displayed
 
     // Title
-    const headings = screen.getAllByTestId("search-result-heading");
-    headings.forEach((heading) => {
-      expect(heading).toHaveTextContent("hello");
-    });
+    const heading = screen.getByTestId("search-result-heading");
+    expect(heading).toHaveTextContent("hello");
 
     // First definition
     const definitions = screen.getAllByTestId("definition");

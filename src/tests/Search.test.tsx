@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe } from "vitest";
 import Search from "../components/Search";
+import { preformSearch } from "./utils";
 
 describe("Unit testing for Search field component", async () => {
   test("Should be possible to type a word in the input field", async () => {
@@ -22,7 +23,27 @@ describe("Unit testing for Search field component", async () => {
     await user.click(screen.getByRole("button", { name: "Search" }));
   });
 
-  test("Should call the function setSearchedWord when a word is submitted", async () => {
+  test("Should be able to search by pressing enter key", async () => {
+    const user = userEvent.setup();
+    const mockSetSerchedWord = vi.fn();
+    render(
+      <Search
+        setSearchedWord={mockSetSerchedWord}
+        searchedWord={""}
+        onSaveWord={vi.fn()}
+      />
+    );
+
+    const searchfield = screen.getByRole("textbox");
+
+    // Simulate user searching for the word "hello"
+    await user.click(searchfield);
+    await user.type(searchfield, "hello");
+    await user.keyboard("{Enter}");
+    expect(mockSetSerchedWord).toHaveBeenCalledWith("hello");
+  });
+
+  test("Should call the function setSearchedWord when a word is submitted by click on submit button", async () => {
     const mockSetSerchedWord = vi.fn();
     const user = userEvent.setup();
 
@@ -34,14 +55,11 @@ describe("Unit testing for Search field component", async () => {
       />
     );
 
-    // Simulating user typing and submitting the word "hello world"
+    // Simulating user typing and submitting the word "hello"
     // Verify that the search field accepts and input
     // Expect mockSetSearchedWord function to have been called
-    const searchField = screen.getByRole("textbox");
-    await user.type(searchField, "test");
-    expect(searchField).toHaveValue("test");
-    await user.click(screen.getByRole("button", { name: "Search" }));
-    expect(mockSetSerchedWord).toHaveBeenCalledWith("test");
+    await preformSearch("nice", user);
+    expect(mockSetSerchedWord).toHaveBeenCalledWith("nice");
   });
 
   test("Should not be possible to search with empty or incorrect search term", async () => {
@@ -55,18 +73,14 @@ describe("Unit testing for Search field component", async () => {
     const user = userEvent.setup();
 
     // Simulating user typing and submitting an empty string
-    const searchField = screen.getByRole("textbox");
-    await user.type(searchField, " ");
-    const searchButton = screen.getByRole("button", { name: "Search" });
-    await user.click(searchButton);
+    await preformSearch(" ", user);
 
     // Check if error message is displayed
     let errorMessage = screen.getByTestId("error");
     expect(errorMessage).toHaveTextContent("Please enter a word");
 
     // Simulating user typing an incorrect word
-    await user.type(searchField, "idifljksdshf");
-    await user.click(searchButton);
+    await preformSearch("idifljksdshf", user);
 
     await waitFor(() => {
       errorMessage = screen.getByTestId("error");
