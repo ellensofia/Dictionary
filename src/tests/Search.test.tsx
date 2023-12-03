@@ -55,18 +55,17 @@ describe("Unit testing for Search field component", async () => {
       />
     );
 
-    // Simulating user typing and submitting the word "hello"
-    // Verify that the search field accepts and input
+    // Simulating user typing and submitting the word "nice"
     // Expect mockSetSearchedWord function to have been called
     await preformSearch("nice", user);
     expect(mockSetSerchedWord).toHaveBeenCalledWith("nice");
   });
 
-  test("Should not be possible to search with empty or incorrect search term", async () => {
+  test("Display error message when search term is empty ", async () => {
     render(
       <Search
         setSearchedWord={vi.fn()}
-        searchedWord={" "}
+        searchedWord={""}
         onSaveWord={vi.fn()}
       />
     );
@@ -76,15 +75,27 @@ describe("Unit testing for Search field component", async () => {
     await preformSearch(" ", user);
 
     // Check if error message is displayed
-    let errorMessage = screen.getByTestId("error");
-    expect(errorMessage).toHaveTextContent("Please enter a word");
-
-    // Simulating user typing an incorrect word
-    await preformSearch("idifljksdshf", user);
-
     await waitFor(() => {
-      errorMessage = screen.getByTestId("error");
-      expect(errorMessage).toHaveTextContent("Sorry, no definition was found");
+      expect(screen.getByTestId("error")).toHaveTextContent(
+        "Please enter a word"
+      );
     });
+  });
+});
+
+test("Display error message when invalid search term is used", async () => {
+  // Render the Search component with initial prop for searchTerm that's incorrect
+  render(
+    <Search
+      setSearchedWord={vi.fn()}
+      searchedWord={"dksj"}
+      onSaveWord={vi.fn()}
+    />
+  );
+  // Check if error message is displayed
+  await waitFor(() => {
+    expect(screen.getByTestId("error")).toHaveTextContent(
+      "Sorry, no definition was found"
+    );
   });
 });
