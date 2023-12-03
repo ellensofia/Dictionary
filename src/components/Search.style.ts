@@ -15,9 +15,14 @@ export const Searchfield = styled.form`
     margin-top: 2rem;
     background-color: var(--color-primary);
     color: var(--color-secondary);
+    flex: 1;
 
     &:focus-visible {
       outline: transparent;
+    }
+
+    &::placeholder {
+      color: var(--color-secondary);
     }
   }
 
@@ -26,5 +31,6 @@ export const Searchfield = styled.form`
     border-left: none;
     cursor: pointer;
     padding: 0.8rem 1.2rem;
+    width: fit-content;
   }
 `;
