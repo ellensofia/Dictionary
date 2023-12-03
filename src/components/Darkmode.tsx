@@ -1,4 +1,5 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import { useEffect, useState } from "react";
 import { DarkModeBtn } from "./DarkMode.style";
 
@@ -21,7 +22,11 @@ export default function Darkmode() {
 
   return (
     <DarkModeBtn>
-      <DarkModeIcon onClick={toggleDarkmode} data-testid={"darkmode"} />
+      {isDark ? (
+        <LightModeIcon onClick={toggleDarkmode} data-testid={"darkmode"} />
+      ) : (
+        <DarkModeIcon onClick={toggleDarkmode} data-testid={"darkmode"} />
+      )}
     </DarkModeBtn>
   );
 }

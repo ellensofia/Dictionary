@@ -40,7 +40,12 @@ export default function Result({ searchResult, onSaveWord }: Props) {
                 {searchResult.length > 1 && <span>{index + 1}.</span>}
                 <h2 data-testid="search-result-heading">{word.word}</h2>
                 <h3 className="phonetic" data-testid="phonetic">
-                  {word.phonetic}
+                  {word.phonetic ? (
+                    <>{word.phonetic}</>
+                  ) : (
+                    word.phonetics &&
+                    word.phonetics.find((phonetic) => phonetic.text)?.text
+                  )}
                 </h3>
               </div>
               {word.meanings.map((meaning, mIndex) => (

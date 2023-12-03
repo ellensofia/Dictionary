@@ -17,14 +17,22 @@ export const AppContainer = styled.div`
     min-width: 350px;
   }
 
-  @media screen and (max-width: 860px) {
+  form {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .error {
+    margin-top: 2rem;
+  }
+  @media (max-width: 860px) {
     .search-container {
       min-width: 250px;
       width: 100%;
     }
   }
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     padding: 1rem;
   }
 `;

@@ -7,7 +7,9 @@ export const SavedContainer = styled.div`
   width: 100%;
   h3 {
     margin: 0;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2.3rem;
   }
 
   ul {
@@ -18,7 +20,7 @@ export const SavedContainer = styled.div`
   }
 
   li {
-    padding: 0.2rem;
+    padding: 0.2rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;

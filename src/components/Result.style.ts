@@ -28,6 +28,7 @@ export const ResultStyle = styled.div`
     margin-bottom: 1rem;
     font-size: 2rem;
   }
+
   h4 {
     font-size: 1.2rem;
   }
@@ -49,7 +50,7 @@ export const ResultStyle = styled.div`
     cursor: pointer;
     position: absolute;
     right: 0;
-    top: 1rem;
+    top: 1.8rem;
     font-weight: 300;
 
     svg {
@@ -76,6 +77,8 @@ export const ResultStyle = styled.div`
     list-style: none;
   }
 
-  li {
+  div {
+    padding: 0.5rem 0;
+    line-height: 1.6;
   }
 `;
