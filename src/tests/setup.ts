@@ -5,6 +5,7 @@ import { server } from "../mocks/node";
 
 beforeAll(() => server.listen());
 afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
 
 // Clears jsdom after each test
 afterEach(() => {
